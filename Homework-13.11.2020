@@ -5,7 +5,7 @@ my_str2 = []
 vowels = ('a', 'o', 'u', 'e', 'i')
 
 for i in my_str:
-    if i in vowels:
+    if i.lower() in vowels:
       my_str2.append(i * 4)
     else:
         my_str2.append(i)
