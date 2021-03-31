@@ -1,0 +1,36 @@
+import uuid
+
+class Employee():
+    def __init__(self):
+        self.name = "Viktor"
+        self.email = "Viktor.K.Naydenov.2019@elsys-bg.org"
+        self.id = self.make_id()
+
+    def make_id(self):
+        id = uuid.uuid4()
+        return id
+
+    def print_employee(self):
+        print(self.name)
+        print(self.email)
+        print(self.id)
+
+
+class Company():
+    def __init__(self):
+        self.name = "Samsung"
+        self.employees = ["Viktor Naydenov", "Yasen Angelov", "Kaloyan Doychinov"]
+
+    def print_employees(self):
+        print(self.employees)
+
+    def add_employee(self, new_employee):
+        self.employees.append(new_employee)
+
+employee = Employee()
+employee.print_employee()
+
+company = Company()
+company.print_employees()
+company.add_employee("Aleko Georgiev")
+company.print_employees()
