@@ -1,0 +1,67 @@
+import random
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def deposit(self,  amount):
+        self.balance += amount
+
+    def withdraw(self, amount):
+        if self.balance - amount < 0:
+            print("Can't withdraw money")
+            return
+        self.balance -= amount
+
+    def get_balance(self):
+        print(self.balance)
+        return self.balance
+
+
+class Client():
+    def __init__(self):
+        self.bank_accounts = []
+        self.id = ""
+        for i in range(0, 8):
+            self.id += random.choice(alphabet)
+
+    def add_bank_account(self, amount):
+        b = BankAccount(amount)
+        self.bank_accounts.append(b)
+
+    def deposit(self, amount):
+        if not self.bank_accounts:
+            raise ValueError("No bank accounts")
+        self.bank_accounts[0].deposit(amount)
+
+    def withdraw(self, amount):
+        if not self.bank_accounts:
+            raise ValueError("No bank accounts")
+        for i in self.bank_accounts:
+            if i.balance > amount:
+                i.withdraw(amount)
+
+    def transfer(self, client, amount, operation="deposit"):
+        if not isinstance(client, Client):
+            print("Not a client")
+            return
+        if operation == "deposit":
+            client.withdraw(amount)
+            self.deposit(amount)
+        else:
+            client.deposit(amount)
+            self.withdraw(amount)
+
+acc = BankAccount(150)
+acc.deposit(1500)
+acc.get_balance()
+acc.withdraw(2000)
+acc.get_balance()
+
+client1 = Client()
+client1.add_bank_account(500)
+
+client2 = Client()
+client2.add_bank_account(1500)
+client2.transfer(client1, 250, "withdraw")
+print("Transfer: ", client2.bank_accounts[0].balance, client1.bank_accounts[0].balance)
