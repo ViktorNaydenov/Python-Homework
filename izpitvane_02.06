@@ -1,0 +1,27 @@
+class File:
+    def __init__(self, file_path):
+        self.file = file_path 
+        
+    def read(self):
+        with open("my_file.txt", 'r') as f:
+            f.read()
+    
+    def split_file(self):
+        number_of_files = 0
+        for i in self.file:
+            if i == "\n":
+                number_of_files += 1
+    #Тук предполагам, че трябва да се използва функцията split, но не съм сигурен точно как трябва да стане
+                
+    def count_symbols(self):
+        count = 0
+        for i in self.file:
+            if i == "." or i == "!" or i == "?" or i == ",":
+                count += 1
+            
+        return count
+            
+        
+my_file = File("my_file.txt")
+my_file.read()
+print(my_file.count_symbols())
